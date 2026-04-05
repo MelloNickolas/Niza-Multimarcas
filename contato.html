@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Niza Multimarcas</title>
+  <meta name="description" content="Entre em contato com a Niza Multimarcas. Atendimento em Lençóis Paulista, SP.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="imgs/logo.png" type="image/png">
+  <style>
+    .contact-section-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-section-title::before {
+      content: '';
+      display: block;
+      width: 20px; height: 3px;
+      background: var(--red);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .maps-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    /* Horários com destaque fim de semana */
+    .hours-row.weekend .hours-day { color: var(--red); }
+    .hours-row.today {
+      background: rgba(204,0,0,0.06);
+      padding: 12px 12px;
+      margin: 0 -12px;
+      border-radius: var(--radius);
+    }
+    .hours-row.today .hours-day { color: var(--white); font-weight: 600; }
+    .today-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--white);
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+    }
+
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .contact-card:hover {
+      border-color: rgba(204,0,0,0.3);
+    }
+
+    .whatsapp-cta {
+      background: linear-gradient(135deg, #0d1f0d, #0a0a0a);
+      border: 1px solid rgba(37,211,102,0.2);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      margin-top: 48px;
+    }
+    .whatsapp-cta .icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .whatsapp-cta h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .whatsapp-cta p { color: var(--gray-light); margin-bottom: 20px; }
+    .btn-whatsapp {
+      background: #25d366;
+      color: #fff;
+      border: 2px solid #25d366;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .btn-whatsapp:hover {
+      background: #1ebe57;
+      border-color: #1ebe57;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+
+  <!-- ════════════ PÁGINA CONTATO ════════════ -->
+  <main class="contact-page">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav style="display:flex;gap:8px;align-items:center;font-size:0.85rem;color:var(--gray);margin-bottom:32px">
+        <a href="index.html" style="color:var(--gray);transition:var(--transition)">Início</a>
+        <span style="color:var(--border)">›</span>
+        <span style="color:var(--white)">Contato</span>
+      </nav>
+
+      <!-- Hero contato: logo + info -->
+      <div class="contact-hero fade-up">
+        <div class="contact-logo">
+          <img src="imgs/logo.png" alt="Niza Multimarcas">
+        </div>
+        <div class="contact-info-list">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📞</div>
+            <div>
+              <div class="contact-info-label">Telefone / WhatsApp</div>
+              <a href="https://wa.me/5514999999999" class="contact-info-value" style="color:var(--white);transition:var(--transition)"
+                onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--white)'">
+                (14) 99999-9999
+              </a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">✉</div>
+            <div>
+              <div class="contact-info-label">E-mail</div>
+              <a href="mailto:contato@nizamultimarcas.com.br" class="contact-info-value"
+                style="color:var(--white);transition:var(--transition)"
+                onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--white)'">
+                contato@nizamultimarcas.com.br
+              </a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📍</div>
+            <div>
+              <div class="contact-info-label">Endereço</div>
+              <div class="contact-info-value">Av. Principal, 1234 — Centro<br>Lençóis Paulista — SP, 18680-000</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Instagram</div>
+              <a href="https://instagram.com/nizamultimarcas" target="_blank" rel="noopener"
+                class="contact-info-value" style="color:var(--white);transition:var(--transition)"
+                onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--white)'">
+                @nizamultimarcas
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid: Mapa + Horários -->
+      <div class="contact-grid fade-up">
+
+        <!-- Mapa e endereço -->
+        <div>
+          <p class="contact-section-title">Localização</p>
+          <div class="contact-card">
+            <div class="contact-map-frame">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3695.0!2d-48.799!3d-22.598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDM1JzUyLjgiUyA0OMKwNDcnNTYuNCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+                loading="lazy"
+                title="Localização Niza Multimarcas"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <p style="color:var(--gray-light);font-size:0.95rem;margin-top:16px">
+              📍 Av. Principal, 1234 — Centro, Lençóis Paulista — SP
+            </p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Av.+Principal,+1234+Lençóis+Paulista+SP"
+              target="_blank" rel="noopener"
+              class="btn btn-red maps-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              Abrir no Google Maps
+            </a>
+          </div>
+        </div>
+
+        <!-- Horários -->
+        <div>
+          <p class="contact-section-title">Horário de Atendimento</p>
+          <div class="contact-card">
+            <div class="hours-grid" id="hours-grid">
+              <!-- preenchido via JS para destacar o dia atual -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA WhatsApp -->
+      <div class="whatsapp-cta fade-up">
+        <div class="icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="#25d366">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </div>
+        <h3>Fale com a gente agora!</h3>
+        <p>Tire suas dúvidas, negocie e agende sua visita diretamente pelo WhatsApp</p>
+        <a href="https://wa.me/5514999999999?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20ve%C3%ADculos%20da%20Niza%20Multimarcas."
+          target="_blank" rel="noopener" class="btn-whatsapp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Chamar no WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+  // ── HORÁRIOS ──────────────────────────────────────────
+  const horarios = [
+    { dia: 'Segunda-feira',  horario: '08:00 – 18:00', fechado: false, weekend: false },
+    { dia: 'Terça-feira',    horario: '08:00 – 18:00', fechado: false, weekend: false },
+    { dia: 'Quarta-feira',   horario: '08:00 – 18:00', fechado: false, weekend: false },
+    { dia: 'Quinta-feira',   horario: '08:00 – 18:00', fechado: false, weekend: false },
+    { dia: 'Sexta-feira',    horario: '08:00 – 18:00', fechado: false, weekend: false },
+    { dia: 'Sábado',         horario: '08:00 – 14:00', fechado: false, weekend: true  },
+    { dia: 'Domingo',        horario: 'Fechado',        fechado: true,  weekend: true  },
+  ];
+
+  // 0=domingo, 1=segunda...
+  const todayIndex = new Date().getDay();
+  // converte para index do array (seg=0...dom=6)
+  const mappedToday = todayIndex === 0 ? 6 : todayIndex - 1;
+
+  const grid = document.getElementById('hours-grid');
+  if (grid) {
+    grid.innerHTML = horarios.map((h, i) => `
+      <div class="hours-row${h.weekend ? ' weekend' : ''}${i === mappedToday ? ' today' : ''}">
+        <span class="hours-day">
+          ${h.dia}
+          ${i === mappedToday ? '<span class="today-badge">Hoje</span>' : ''}
+        </span>
+        <span class="${h.fechado ? 'hours-closed' : 'hours-time'}">${h.horario}</span>
+      </div>
+    `).join('');
+  }
+  </script>
+</body>
+</html>

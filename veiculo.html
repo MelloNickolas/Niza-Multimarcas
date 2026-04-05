@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veículo — Niza Multimarcas</title>
+  <meta name="description" content="Detalhes do veículo — Niza Multimarcas">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="imgs/logo.png" type="image/png">
+  <style>
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 0;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    .breadcrumb a { color: var(--gray); transition: var(--transition); }
+    .breadcrumb a:hover { color: var(--red); }
+    .breadcrumb span { color: var(--white); }
+    .breadcrumb .sep { color: var(--border); }
+
+    .gallery-main-wrap {
+      position: relative;
+      cursor: zoom-in;
+    }
+    .gallery-main-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: opacity 0.35s ease;
+    }
+
+    .btn-interested {
+      width: 100%;
+      justify-content: center;
+      padding: 16px;
+      font-size: 1.1rem;
+      gap: 10px;
+      margin-top: 8px;
+      box-shadow: 0 8px 32px rgba(204,0,0,0.3);
+    }
+    .btn-interested:hover {
+      box-shadow: 0 12px 40px rgba(204,0,0,0.5);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gray);
+      font-size: 0.9rem;
+      transition: var(--transition);
+      margin-bottom: 16px;
+    }
+    .back-btn:hover { color: var(--red); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      font-size: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .lightbox-close:hover { background: var(--red); }
+
+    .not-found {
+      text-align: center;
+      padding: 120px 24px;
+    }
+    .not-found h2 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">✕</button>
+    <img src="" alt="Foto ampliada" id="lightbox-img">
+  </div>
+
+  <!-- ════════════ PÁGINA DO VEÍCULO ════════════ -->
+  <main class="vehicle-page container" id="vehicle-content">
+    <div style="text-align:center;padding:60px;color:var(--gray)">Carregando...</div>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+  let currentGalleryIndex = 0;
+  let galleryImages = [];
+
+  function setMainImage(src, index) {
+    currentGalleryIndex = index;
+    const mainImg = document.getElementById('gallery-main-img');
+    if (!mainImg) return;
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+      mainImg.src = src;
+      mainImg.style.opacity = '1';
+    }, 150);
+    document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightbox')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function renderVehiclePage(v) {
+    galleryImages = v.galeria || [];
+    const hasImages = galleryImages.length > 0;
+    const mainSrc   = hasImages ? galleryImages[0] : '';
+
+    const thumbsHtml = galleryImages.map((src, i) => `
+      <div class="gallery-thumb ${i === 0 ? 'active' : ''}" data-src="${src}" data-index="${i}">
+        <img src="${src}" alt="Foto ${i+1}" loading="lazy"
+          onerror="this.parentElement.style.display='none'">
+      </div>
+    `).join('');
+
+    const specsHtml = `
+      <div class="vehicle-specs-grid">
+        <div class="spec-card fade-up">
+          <div class="spec-card-label">Ano</div>
+          <div class="spec-card-value">${v.ano}</div>
+        </div>
+        <div class="spec-card fade-up">
+          <div class="spec-card-label">Marca</div>
+          <div class="spec-card-value">${v.marca}</div>
+        </div>
+        <div class="spec-card fade-up">
+          <div class="spec-card-label">Câmbio</div>
+          <div class="spec-card-value">${v.cambio}</div>
+        </div>
+        <div class="spec-card fade-up">
+          <div class="spec-card-label">Combustível</div>
+          <div class="spec-card-value">${v.combustivel}</div>
+        </div>
+        <div class="spec-card fade-up">
+          <div class="spec-card-label">Quilometragem</div>
+          <div class="spec-card-value">${formatKm(v.km)}</div>
+        </div>
+        <div class="spec-card fade-up">
+          <div class="spec-card-label">Tipo</div>
+          <div class="spec-card-value">${v.tipo}</div>
+        </div>
+      </div>`;
+
+    return `
+      <nav class="breadcrumb">
+        <a href="index.html">Início</a>
+        <span class="sep">›</span>
+        <a href="carros.html">Automóveis</a>
+        <span class="sep">›</span>
+        <span>${v.marca} ${v.nome}</span>
+      </nav>
+
+      <a href="carros.html" class="back-btn">← Voltar ao estoque</a>
+
+      <div class="vehicle-layout">
+        <!-- GALERIA -->
+        <div class="vehicle-gallery">
+          <div class="gallery-main gallery-main-wrap" id="gallery-main-wrap">
+            ${hasImages
+              ? `<img src="${mainSrc}" alt="${v.nome}" id="gallery-main-img"
+                  onerror="this.src=''; this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\' style=\\'height:100%\\'>🚗</div>'">`
+              : `<div class="card-img-placeholder" style="height:100%;font-size:4rem">🚗</div>`
+            }
+          </div>
+          ${galleryImages.length > 1 ? `<div class="gallery-thumbs">${thumbsHtml}</div>` : ''}
+        </div>
+
+        <!-- INFOS -->
+        <aside class="vehicle-info">
+          <div class="vehicle-badge">${v.tipo} · ${v.ano}</div>
+          <h1 class="vehicle-name">${v.marca} <span style="color:var(--red)">${v.nome}</span></h1>
+
+          <div class="vehicle-price-block">
+            <div class="vehicle-price-label">Preço</div>
+            <div class="vehicle-price">${formatPrice(v.preco)}</div>
+          </div>
+
+          ${specsHtml}
+
+          <a href="${v.link}" target="_blank" rel="noopener" class="btn btn-red btn-interested">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Estou Interessado!
+          </a>
+
+          <p style="text-align:center;font-size:0.8rem;color:var(--gray);margin-top:12px">
+            Você será redirecionado para o WhatsApp
+          </p>
+        </aside>
+      </div>`;
+  }
+
+  function showNotFound() {
+    document.getElementById('vehicle-content').innerHTML = `
+      <div class="not-found">
+        <h2>Veículo não encontrado</h2>
+        <p style="color:var(--gray);margin-bottom:24px">O veículo que você procura não está disponível ou foi vendido.</p>
+        <a href="carros.html" class="btn btn-red">Ver estoque completo</a>
+      </div>`;
+    document.title = 'Não encontrado — Niza Multimarcas';
+  }
+
+  // ── INIT ──────────────────────────────────────────────
+  loadVehicles().then(vehicles => {
+    const { id } = getUrlParams();
+    if (!id) { showNotFound(); return; }
+
+    const v = vehicles.find(x => x.id === id);
+    if (!v) { showNotFound(); return; }
+
+    // Título da página
+    document.title = `${v.marca} ${v.nome} ${v.ano} — Niza Multimarcas`;
+
+    // Render
+    const content = document.getElementById('vehicle-content');
+    content.innerHTML = renderVehiclePage(v);
+
+    // Eventos da galeria
+    document.querySelectorAll('.gallery-thumb').forEach((t) => {
+      t.addEventListener('click', () => {
+        setMainImage(t.dataset.src, +t.dataset.index);
+      });
+    });
+
+    // Lightbox ao clicar na imagem principal
+    document.getElementById('gallery-main-wrap')?.addEventListener('click', () => {
+      const src = document.getElementById('gallery-main-img')?.src;
+      if (src) openLightbox(src);
+    });
+
+    // Scroll reveal
+    initScrollReveal();
+  });
+  </script>
+</body>
+</html>

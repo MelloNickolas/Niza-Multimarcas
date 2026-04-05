@@ -1,0 +1,148 @@
+[
+  {
+    "id": "001",
+    "ano": 2020,
+    "nome": "Celta LS 1.0",
+    "marca": "Chevrolet",
+    "preco": 28900,
+    "cambio": "Manual",
+    "km": 62000,
+    "combustivel": "Flex",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/celta/foto1.jpg",
+      "imgs/imgs-carros/celta/foto2.jpg",
+      "imgs/imgs-carros/celta/foto3.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Chevrolet%20Celta%20LS%201.0%202020.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "002",
+    "ano": 2019,
+    "nome": "911 Carrera S",
+    "marca": "Porsche",
+    "preco": 780000,
+    "cambio": "Automático",
+    "km": 18000,
+    "combustivel": "Gasolina",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/porsche/foto1.jpg",
+      "imgs/imgs-carros/porsche/foto2.jpg",
+      "imgs/imgs-carros/porsche/foto3.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Porsche%20911%20Carrera%20S%202019.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "003",
+    "ano": 2021,
+    "nome": "CB 500F",
+    "marca": "Honda",
+    "preco": 34500,
+    "cambio": "Manual",
+    "km": 9800,
+    "combustivel": "Gasolina",
+    "tipo": "Moto",
+    "galeria": [
+      "imgs/imgs-carros/cb500f/foto1.jpg",
+      "imgs/imgs-carros/cb500f/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20CB%20500F%202021.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "004",
+    "ano": 2022,
+    "nome": "HB20 Sense 1.0",
+    "marca": "Hyundai",
+    "preco": 72900,
+    "cambio": "Manual",
+    "km": 21000,
+    "combustivel": "Flex",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/hb20/foto1.jpg",
+      "imgs/imgs-carros/hb20/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Hyundai%20HB20%20Sense%201.0%202022.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "005",
+    "ano": 2018,
+    "nome": "Civic EXL 1.5 Turbo",
+    "marca": "Honda",
+    "preco": 115000,
+    "cambio": "Automático",
+    "km": 48000,
+    "combustivel": "Flex",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/civic/foto1.jpg",
+      "imgs/imgs-carros/civic/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Honda%20Civic%20EXL%201.5%20Turbo%202018.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "006",
+    "ano": 2023,
+    "nome": "Tracker Premier 1.2 Turbo",
+    "marca": "Chevrolet",
+    "preco": 138500,
+    "cambio": "Automático",
+    "km": 5000,
+    "combustivel": "Flex",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/tracker/foto1.jpg",
+      "imgs/imgs-carros/tracker/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Chevrolet%20Tracker%20Premier%201.2%20Turbo%202023.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "007",
+    "ano": 2020,
+    "nome": "XRE 300",
+    "marca": "Honda",
+    "preco": 22800,
+    "cambio": "Manual",
+    "km": 31000,
+    "combustivel": "Flex",
+    "tipo": "Moto",
+    "galeria": [
+      "imgs/imgs-carros/xre300/foto1.jpg",
+      "imgs/imgs-carros/xre300/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20XRE%20300%202020.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "008",
+    "ano": 2021,
+    "nome": "Compass Limited 2.0",
+    "marca": "Jeep",
+    "preco": 189900,
+    "cambio": "Automático",
+    "km": 37000,
+    "combustivel": "Diesel",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/compass/foto1.jpg",
+      "imgs/imgs-carros/compass/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Jeep%20Compass%20Limited%202.0%202021.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  },
+  {
+    "id": "009",
+    "ano": 1200,
+    "nome": "Teste do carro",
+    "marca": "teste",
+    "preco": 2000,
+    "cambio": "Automático",
+    "km": 100000,
+    "combustivel": "Diesel",
+    "tipo": "Carro",
+    "galeria": [
+      "imgs/imgs-carros/compass/foto1.jpg",
+      "imgs/imgs-carros/compass/foto2.jpg"
+    ],
+    "link": "https://wa.me/5514997915548?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Jeep%20Compass%20Limited%202.0%202021.%20Poderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+  }
+]

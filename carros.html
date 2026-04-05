@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automóveis — Niza Multimarcas</title>
+  <meta name="description" content="Confira o estoque completo de carros e motos seminovos da Niza Multimarcas.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="imgs/logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+
+  <!-- ════════════ PAGE HERO ════════════ -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="red-line"></div>
+      <h1 class="page-hero-title">Nosso <span>Estoque</span></h1>
+      <p class="page-hero-sub" id="results-subtitle">Carregando veículos...</p>
+    </div>
+  </section>
+
+  <!-- ════════════ FILTROS ════════════ -->
+  <div class="filters-bar">
+    <div class="container">
+      <form class="filters-form" id="filters-form">
+
+        <div class="filter-field">
+          <label>Ano mín.</label>
+          <input type="number" id="f-ano-min" name="anoMin" placeholder="2010" min="1990" max="2025" style="width:90px">
+        </div>
+        <div class="filter-field">
+          <label>Ano máx.</label>
+          <input type="number" id="f-ano-max" name="anoMax" placeholder="2024" min="1990" max="2025" style="width:90px">
+        </div>
+
+        <div class="filter-field">
+          <label>Preço mín. (R$)</label>
+          <input type="number" id="f-preco-min" name="precoMin" placeholder="0" min="0" style="width:120px">
+        </div>
+        <div class="filter-field">
+          <label>Preço máx. (R$)</label>
+          <input type="number" id="f-preco-max" name="precoMax" placeholder="999999" min="0" style="width:120px">
+        </div>
+
+        <div class="filter-field">
+          <label>Tipo</label>
+          <select id="f-tipo" name="tipo" style="width:110px">
+            <option value="todos">Todos</option>
+            <option value="Carro">Carro</option>
+            <option value="Moto">Moto</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-search-input">
+          <label>Buscar por nome</label>
+          <input type="text" id="f-busca" name="busca" placeholder="Ex: Civic, Tracker...">
+        </div>
+
+        <button type="submit" class="btn btn-red">Pesquisar</button>
+        <button type="button" class="btn btn-outline" id="btn-limpar">Limpar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ════════════ RESULTADOS ════════════ -->
+  <div class="container">
+    <p class="results-info" id="results-info">Carregando...</p>
+    <div class="vehicles-grid-full" id="vehicles-grid-full">
+      <div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray)">Carregando veículos...</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+  let allVehicles = [];
+
+  // ── APLICAR FILTROS ──────────────────────────────────
+  function applyFilters(vehicles, params) {
+    return vehicles.filter(v => {
+      if (params.anoMin   && v.ano   < +params.anoMin)   return false;
+      if (params.anoMax   && v.ano   > +params.anoMax)   return false;
+      if (params.precoMin && v.preco < +params.precoMin) return false;
+      if (params.precoMax && v.preco > +params.precoMax) return false;
+      if (params.tipo && params.tipo !== 'todos' && v.tipo !== params.tipo) return false;
+      if (params.busca) {
+        const q = params.busca.toLowerCase();
+        if (!v.nome.toLowerCase().includes(q) && !v.marca.toLowerCase().includes(q)) return false;
+      }
+      return true;
+    });
+  }
+
+  // ── POPULAR FILTROS COM URL PARAMS ───────────────────
+  function populateFiltersFromUrl(params) {
+    if (params.anoMin)   document.getElementById('f-ano-min').value   = params.anoMin;
+    if (params.anoMax)   document.getElementById('f-ano-max').value   = params.anoMax;
+    if (params.precoMin) document.getElementById('f-preco-min').value = params.precoMin;
+    if (params.precoMax) document.getElementById('f-preco-max').value = params.precoMax;
+    if (params.tipo && params.tipo !== 'todos') document.getElementById('f-tipo').value = params.tipo;
+    if (params.busca)    document.getElementById('f-busca').value     = params.busca;
+  }
+
+  // ── RENDERIZAR RESULTADOS ────────────────────────────
+  function renderResults(filtered) {
+    const grid = document.getElementById('vehicles-grid-full');
+    const info = document.getElementById('results-info');
+    const sub  = document.getElementById('results-subtitle');
+
+    info.innerHTML = `Exibindo <span>${filtered.length}</span> veículo${filtered.length !== 1 ? 's' : ''}`;
+    sub.textContent = `${filtered.length} veículo${filtered.length !== 1 ? 's' : ''} encontrado${filtered.length !== 1 ? 's' : ''}`;
+
+    if (!filtered.length) {
+      grid.innerHTML = `
+        <div class="no-results">
+          <div class="icon">🔍</div>
+          <h3>Nenhum veículo encontrado</h3>
+          <p>Tente ajustar os filtros para encontrar o que procura.</p>
+        </div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(renderVehicleCard).join('');
+    initScrollReveal();
+  }
+
+  // ── PEGAR VALORES DO FORM ────────────────────────────
+  function getFormValues() {
+    return {
+      anoMin:   document.getElementById('f-ano-min').value.trim(),
+      anoMax:   document.getElementById('f-ano-max').value.trim(),
+      precoMin: document.getElementById('f-preco-min').value.trim(),
+      precoMax: document.getElementById('f-preco-max').value.trim(),
+      tipo:     document.getElementById('f-tipo').value,
+      busca:    document.getElementById('f-busca').value.trim(),
+    };
+  }
+
+  // ── SUBMIT ───────────────────────────────────────────
+  document.getElementById('filters-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const params = getFormValues();
+    const filtered = applyFilters(allVehicles, params);
+    renderResults(filtered);
+    // Atualiza URL sem recarregar
+    const urlParams = new URLSearchParams();
+    Object.entries(params).forEach(([k, v]) => { if (v && v !== 'todos') urlParams.set(k, v); });
+    window.history.replaceState({}, '', 'carros.html' + (urlParams.toString() ? '?' + urlParams : ''));
+  });
+
+  // ── LIMPAR ───────────────────────────────────────────
+  document.getElementById('btn-limpar').addEventListener('click', () => {
+    document.getElementById('filters-form').reset();
+    renderResults(allVehicles);
+    window.history.replaceState({}, '', 'carros.html');
+  });
+
+  // ── INIT ─────────────────────────────────────────────
+  loadVehicles().then(data => {
+    allVehicles = data;
+    const urlParams = getUrlParams();
+    populateFiltersFromUrl(urlParams);
+
+    // Verifica se há algum filtro na URL
+    const hasFilter = Object.values(urlParams).some(v => v && v !== 'todos');
+    const filtered = hasFilter ? applyFilters(allVehicles, urlParams) : allVehicles;
+    renderResults(filtered);
+  });
+  </script>
+</body>
+</html>
